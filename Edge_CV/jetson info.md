@@ -1,9 +1,25 @@
+## Getting the Jetson to work
+It needs:
+- usb c (I think it's called) power
+- hdmi monitor
+- usb mouse and keyboard
+- micro sd card with Ubuntu, yolo, ... (inside it now)
+- it will work with an Ethernet cable
+- I think it will work with a bluetooth wifi card, which I think I had but can't find now
+
+password is our old major is awesome
+
+## Working on the Jetson
+
+See the "info.txt" file on the desktop, contents follow -
+
 Do this:
 
 workon yolov7
 
 cd yolo/yolov7
 
+*contents of the directory:*
 cfg            hubconf.py        scripts
 data           inference         test.py
 deploy         LICENSE.md        tools
