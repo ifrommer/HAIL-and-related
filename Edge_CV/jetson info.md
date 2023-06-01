@@ -47,3 +47,9 @@ python detect.py --weights yolov7-tiny.pt --source inference/images/horses.jpg -
 Explanation:
 --weights yolov7-tiny.pt - tells yolo which weights file to use; originally this said yolov7.pt, but that 
 is not in the folder as is, and since I did see the -tiny.py one, I changed it to that, which seems to be working.
+
+### more
+	Id: ubuntu pw: ubuntu   -- not sure if this is still valid
+	CTL ALT F4 to CTL ALT F7  to toggle between desktop and command prompt
+	
+
