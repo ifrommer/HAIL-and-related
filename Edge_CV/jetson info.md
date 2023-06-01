@@ -51,5 +51,8 @@ is not in the folder as is, and since I did see the -tiny.py one, I changed it t
 ### more
 	Id: ubuntu pw: ubuntu   -- not sure if this is still valid
 	CTL ALT F4 to CTL ALT F7  to toggle between desktop and command prompt
+	Get onto vpn (id: orda  pw: orcaisawesome)
+
+
 	
 
