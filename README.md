@@ -11,6 +11,7 @@ yolo on one ring video on lambda - took 6s
 did a decent job
 
 ### next up 
+- Move Ring videos (prob from Son. laptop) to roboflow for labelling
 - label some ring videos with people and car names 
 - retrain 
 - test
