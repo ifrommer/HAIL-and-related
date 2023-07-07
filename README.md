@@ -12,6 +12,7 @@ did a decent job
 
 ### next up 
 - Move Ring videos (prob from Son. laptop) to roboflow for labelling
+  -   find ones that have a variety of people and cars
 - label some ring videos with people and car names 
 - retrain 
 - test
