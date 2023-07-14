@@ -1,5 +1,7 @@
 # HAIL-and-related
 
+prof frommer changed this file
+
 some progress
 
 did some stuff before - python to batch download ring
