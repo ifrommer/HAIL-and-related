@@ -1,6 +1,6 @@
 # HAIL-and-related
 
-prof frommer changed this file
+ifrommer removed prof-frommer change
 
 some progress
 
