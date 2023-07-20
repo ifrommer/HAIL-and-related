@@ -15,6 +15,6 @@ did a decent job
 ### next up 
 - Move Ring videos (prob from Son. laptop) to roboflow for labelling
   -   find ones that have a variety of people and cars
-- label some ring videos with people and car names 
+- label some ring videos with people and car names - try running Yolo on the first to see if it can do the labeling for you
 - retrain 
 - test
