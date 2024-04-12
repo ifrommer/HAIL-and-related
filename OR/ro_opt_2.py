@@ -7,6 +7,7 @@ v2 Rebuilt on 4/12/24 to correct errors and implemented attraction factor
 """
 from pulp import *
 from amply import *
+import ro_utils
 
 data = Amply("""
 set parts;
@@ -40,7 +41,7 @@ AR_ros = make_inv_dict(AR_mkts)
 d = {1: 200, 2: 200}  # potential accessions
 c = 20  # recruits accessed per recruiter
 w_or = 0.5  # outer ring recruiter reduction factor
-attr = {1: 1, 2: 1, 3:1}  # attraction factor for RO, larger is more
+attr = {1: 5, 2: 1, 3:1}  # attraction factor for RO, larger is more
 
 # mu_lo = 3
 # mu_hi = 12
@@ -104,33 +105,38 @@ def get_inflation_str(attr,x,i,j):
         extra_str = ', which is adjusted by attraction factor '
         extra_str += f'{attr[i]} to {attr[i]*x[i][j].varValue} units'
     return extra_str
-
+print()
 for i in roffices:
  
-    print(f'Of a total of {c*mu} units:')
+    print(f'Of a total supply of {c*mu} units:')
     for j in markets:
-        if attr[i] == 1:
-            extra_str = ''
-        else:
-            extra_str = '\n which is adjusted by attraction factor '
-            extra_str += f'{attr[i]} to service {attr[i]*x[i][j].varValue} '
-            extra_str += 'units of demand'
+        # if attr[i] == 1:
+        #     extra_str = ''
+        # else:
+        #     extra_str = '\n which is adjusted by attraction factor '
+        #     extra_str += f'{attr[i]} to service {attr[i]*x[i][j].varValue} '
+        #     extra_str += 'units of demand'
 
-        print(f'RO{i} ships {x[i][j].varValue} units to MKT{j}',
-              extra_str)
-        if j in OR_mkts[i]:
-            print(f'MKT{j} is an outer market of RO{i}')
-    print()
+        print(f'RO{i} ships {x[i][j].varValue} units to MKT{j}',end=' ')#,extra_str)
+        #if j in OR_mkts[i]:
+            #print(f'MKT{j} is an outer market of RO{i},')
+            #print(f' transfer diminished by {w_or} to {w_or*x[i][j].varValue}')
+        ro_utils.adjusted_flow(
+            x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
+        print()
     
+print()
 for j in markets:
     print(f'Of a total demand of {d[j]} units:')
     for i in roffices:
-        if attr[i] == 1:
-            extra_str = ''
-        else:
-            extra_str = '\n which is adjusted by attraction factor '
-            extra_str += f'{attr[i]} to service {attr[i]*x[i][j].varValue} '
-            extra_str += 'units of demand'
+        # if attr[i] == 1:
+        #     extra_str = ''
+        # else:
+        #     extra_str = '\n which is adjusted by attraction factor '
+        #     extra_str += f'{attr[i]} to service {attr[i]*x[i][j].varValue} '
+        #     extra_str += 'units of demand'
      
-        print(f'MKT{j} receives {x[i][j].varValue} units from RO{i}',extra_str)
+        print(f'MKT{j} receives {x[i][j].varValue} units from RO{i}')
+        ro_utils.adjusted_flow(
+            x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
     print()
