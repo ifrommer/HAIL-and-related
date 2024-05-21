@@ -101,20 +101,22 @@ for variable in ro_opt_model.variables():
    
 print()
 for i in roffices:
-    print(f'Of a total supply of {c*mu} units:')
+    print(f'\n\nOf a total supply of {c*mu} units:')
     for j in markets:
-        print(f'RO{i} ships {x[i][j].varValue} units to MKT{j}',end=' ')#,extra_str)
-        ro_utils.adjusted_flow(
-            x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
-        print()
+        if x[i][j].varValue is not None and x[i][j].varValue > 0:
+            print(f'RO{i} ships {x[i][j].varValue} units to MKT{j}',end=' ')#,extra_str)
+            ro_utils.adjusted_flow(
+                x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
+            print()
     
 print()
 for j in markets:
     print(f'Of a total demand of {d[j]} units:')
     for i in roffices:
-        print(f'MKT{j} receives {x[i][j].varValue} units from RO{i}')
-        ro_utils.adjusted_flow(
-            x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
+        if x[i][j].varValue is not None and x[i][j].varValue > 0:
+            print(f'MKT{j} receives {x[i][j].varValue} units from RO{i}')
+            ro_utils.adjusted_flow(
+                x[i][j].varValue,attr[i],w_or*(j in OR_mkts[i]))
     print()
     
 print('The total # of ROs opened is',lpSum(delta[i] for i in roffices).value())
