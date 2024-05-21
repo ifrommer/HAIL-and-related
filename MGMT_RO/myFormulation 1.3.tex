@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\usepackage[fleqn]{amsmath}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{xcolor}
+\renewcommand{\baselinestretch}{1.5} 
+\begin{document}
+
+	
+\begin{center}
+	{\large\textbf{Recruiting Office Placement and Sizing:  Frommer \#1(v1.3)}}
+\end{center}
+
+This was based on a 2017 ORCA Capstone and updated for a 2024 MGMT Capstone.
+
+Warning:  this is a draft model and has not be verified nor validated.
+
+	\subsection*{Indices}
+	$i = $ Recruiting office (RO) number, $i = 1, 2, ..., R$ \\
+	$j = $ Market (CBSA) number, $j = 1, 2, ..., M$ \\
+
+	\subsection*{Sets}
+	$IR_i$ = Set of markets within the inner ring (60 miles) of RO $i$ \\
+	$OR_i$ = Set of markets within the outer ring (60-120 miles) of RO $i$ \\
+	$AR_i$ = Set of markets within any ring of RO $i$, equals $IR_i \bigcup OR_i$ \\
+	$IR^{-1}_j$ = Set of ROs for which market $j$ is an ``inner-ring" market \\
+	$OR^{-1}_j$ = Set of ROs for which market $j$ is an ``outer-ring" market \\
+	$AR^{-1}_j$ = Set of ROs for which market $j$ is any type of market, equals $IR^{-1}_j \bigcup OR^{-1}_j$ \\
+
+	\subsection*{Model Parameters}
+	$d_j = $ Total potential accessions from market $j$ \\
+	$c = $ Expected ``supply" (i.e. recruits accessed) per recruiter \\
+	$\mu = $ Recruiting office size for each office (in number of personnel) \\
+	$w_{OR} = $ Outer ring reduction weight reflecting reduced recruiter effectiveness in its ``Outer Ring" markets \\
+	$a_i = $ attraction factor of recruiting office $i$, values greater than $1$ indicate the RO can more effectively attract recruits than is normal, which would be a value of $1$. \\
+	$n =$ Maximum number of recruiting offices that may be opened \\
+	$M =$ "Big M" larger than the max expected supply from an RO, used to ensure RO indicator variable is turned on as appropriate \\
+	$\epsilon =$ very small number used to ensure RO indicator variable is turned off as appropriate, can be set to $1/M$ \\
+	% Grayed out parameters are not being used in the current version of the model. \\
+  	% $p$ = Total recruiter personnel available \\
+	% $e_{j} = $ Efficiency of recruitment from market $j$ (average is 1, 2 is twice as hard)\\
+	% $\mu_L$ = Lowest allowable recruiting office size (in number of personnel) \\
+	% $\mu_H$ = Highest allowable recruiting office size (in number of personnel) \\
+	
+		
+	\subsection*{Decision Variables}
+	$x_{ij} = $ Amount of recruitment ``received" (i.e. number of accessions serviced) at market $j$ from RO $i$\\
+{\setlength{\mathindent}{0cm}
+\[	\delta_{i} = 
+	 \left\{
+		 \begin{array}{ll}
+			 1 & \mbox{if RO $i$ is established}, \\
+			 0 & \mbox{otherwise}
+			 \end{array}
+			 \right.
+			 \]			 
+	\textcolor{gray}{$\mu_i = $ size of recruiting office (in number of personnel)}
+	
+	\subsection*{Objective}
+	maximize $\sum\limits_{i=1}^R \sum\limits_{j \in AR_i} x_{ij}$  \qquad Maximize Total Accessions\\
+	
+	\subsection*{Constraints}
+	\begin{equation}  \sum\limits_{j \in AR_i} x_{ij} \le c \mu, 
+		\quad i=1,2,...R \quad \end{equation} 
+	\mbox{(ensure recruiting transmitted does not exceed office ``supply")} 
+	\begin{equation} \sum\limits_{i \in IR_j^{-1}} a_i x_{ij} +
+					 w_{OR} \sum\limits_{i \in OR_j^{-1}} a_i x_{ij} 
+					\le d_j, \quad j = 1, 2, ..., M \quad 
+					\mbox{(limit to accessions in a given market)} \end{equation}
+	
+	\begin{equation}\sum\limits_{i=1}^{R} \delta_{i} \le n \quad  \mbox{(number of ROs does not exceed maximum allowed)}
+	\end{equation} 
+	
+	Next 2 constraints insure RO indicator variables are switched on or off depending on whether the RO transmits supply or not.	
+	\begin{equation}
+	\sum\limits_{j \in AR_i} x_{ij} / M <= 	\delta_i, \quad i = 1, 2, ..., R 
+	\end{equation}
+
+	\begin{equation}
+	\delta_i <= \sum\limits_{j \in AR_i} x_{ij} / \epsilon, \quad i = 1, 2, ..., R
+	\end{equation}
+	
+	
+	 
+	\subsection*{Variable Restrictions}
+	$x_{ij} \ge 0$ \\
+	$\delta_{i} $ binary \\
+    \textcolor{gray}{
+    $\mu_i $ integer \quad (and constraints above enforce that $\mu_i \in \,  \{0, \mu_L, \ldots , \mu_H \} $ ) }\\
+	
+	\subsection*{Additional Explanation}
+		\begin{itemize}
+	\item As formulated above, the model contains no ``demand" satisfaction constraints, that is, there is no requirement for any potential accession to be obtained.  This could easily be added with a set of constraints either uniformly or on a market case-by-case basis.
+		\end{itemize}
+	
+	
+
+\end{document}
