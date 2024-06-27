@@ -12,8 +12,8 @@ devices = ring.devices()
 
 stickup_cams = devices['stickup_cams']
 
-side = stickup_cams[0]
-#%%
+side, front = stickup_cams
+#%%  Shows nice summary of the devices
 for dev in list(devices['stickup_cams']):
     dev.update_health_data()
     print('\nAddress:    %s' % dev.address)
@@ -25,11 +25,13 @@ for dev in list(devices['stickup_cams']):
     print('Wifi RSSI:  %s' % dev.wifi_signal_strength)
     
 
-#%%
+#%%  Prints events from the history, current limiting it to 15 per camera
+# History is stored in reverse - first item in camera.history is most recent
 for camera in stickup_cams:
 
     # listing the last 15 events of any kind
     for event in camera.history(limit=15):
+        print(f'Camera:  {camera}')
         print('ID:       %s' % event['id'])
         print('Kind:     %s' % event['kind'])
         print('Answered: %s' % event['answered'])
@@ -55,7 +57,7 @@ def make_file_name(history_event):
     """ Parameter:  history_event : dict
           ring camera event with many useful fields
     Returns:    string file_name              """
-    prefix = 'data/'; suffix = '.mp4'
+    prefix = '../data/'; suffix = '.mp4'
     file_name_format = '%Y_%m_%d_%H_%M_%S'  
     
     event_date_time   = history_event['created_at']
@@ -63,12 +65,12 @@ def make_file_name(history_event):
     file_name = prefix + event_date_string + suffix 
     return file_name
 
-side_hist = side.history(limit=900)   # can go up to around 861 (as of 5/25)
+side_hist = side.history(limit=1500)   # can go up to around 861 (as of 5/25)
 
 import time
 start_time = time.time()
 #%%
-VIDS_TO_DOWNLOAD = range(416, 448) #829,861)
+VIDS_TO_DOWNLOAD = range(1,500)#1284) #416, 448) #829,861)
 for i in VIDS_TO_DOWNLOAD:
     current_event: dict = side_hist[i]
     file_name = make_file_name(current_event)
