@@ -8,7 +8,7 @@
   - **python** to batch download ring on **Son. machine**
 
 ### in progress
-- identifying who is in which video manually, see *ring_files_info.csv* in some dir on machines as the videos (will upload a copy here)
+- identifying who is in which video manually, see *ring_files_info.csv* in same dir on machines as the videos (will upload a copy here)
 
 ### next up 
 - run  Yolo on the videos on the lambda to get a rough cut of the boxes and labels
