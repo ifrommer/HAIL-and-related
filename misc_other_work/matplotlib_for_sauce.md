@@ -1,3 +1,15 @@
+### more ideas
+don't forget about seaborn - I have older code using it, was very good for scatter plots I did
+snippet from gallery: 
+ns.scatterplot(x="carat", y="price",
+                hue="clarity", size="depth",
+                palette="ch:r=-.2,d=.3_r",
+                hue_order=clarity_ranking,
+                sizes=(1, 8), linewidth=0,
+                data=diamonds, ax=ax)
+
+and what this shows is that using color and pt size can be helpful for displays.  how would these be used in my case?
+
 ### Looks promising
 https://sustainability-gis.readthedocs.io/en/latest/lessons/L5/mobility-analytics.html
 uses geopandas and movingpandas (https://movingpandas.org/ MovingPandas provides trajectory data structures and functions for handling movement data based on Pandas, GeoPandas, and HoloViz.)
