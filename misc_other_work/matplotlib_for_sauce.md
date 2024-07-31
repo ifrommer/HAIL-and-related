@@ -2,7 +2,11 @@
 https://sustainability-gis.readthedocs.io/en/latest/lessons/L5/mobility-analytics.html
 uses geopandas and movingpandas (https://movingpandas.org/ MovingPandas provides trajectory data structures and functions for handling movement data based on Pandas, GeoPandas, and HoloViz.)
 **I think movingpandas could be huge**.  It has several things I was already thinking about using, like computing acceleration from the data, and it can also do direction, and way more.
+back to that tutorial, see https://sustainability-gis.readthedocs.io/en/latest/lessons/L5/mobility-analytics.html#exploratory-analysis-with-space-time-cube-stc this part has nice plot to visualize how it wasn't moving for a while
 
+take a closer look at:  https://anitagraser.com/2020/01/12/movement-data-in-gis-27-extracting-trip-origin-clusters-from-movingpandas-trajectories/
+
+try also python noaa
 
 ### searching for python and ais might help
 
