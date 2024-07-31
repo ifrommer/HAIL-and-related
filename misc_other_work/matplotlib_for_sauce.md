@@ -10,6 +10,15 @@ ns.scatterplot(x="carat", y="price",
 
 and what this shows is that using color and pt size can be helpful for displays.  how would these be used in my case?
 
+this shows ease of use of seaborn to do lineplots - put in dataframe first
+https://seaborn.pydata.org/examples/wide_data_lineplot.html
+
+can you figure out when the cycling group is travelling at different speeds - i.e. high for a while, then gets into a 
+low speed period.  and visualize this.  related - speed averages over regions - like lats, lons, boxes of lat/lons,
+and not just speed, other quantities like altitude
+
+
+
 ### Looks promising
 https://sustainability-gis.readthedocs.io/en/latest/lessons/L5/mobility-analytics.html
 uses geopandas and movingpandas (https://movingpandas.org/ MovingPandas provides trajectory data structures and functions for handling movement data based on Pandas, GeoPandas, and HoloViz.)
