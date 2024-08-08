@@ -1,0 +1,113 @@
+get to finish line - 2 packages that can be deployed with documentation and examples
+
+A. sched_pol
+ 1. get a mock-up of a gridspec page with text, tables, and figures
+
+via *******
+ import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import pandas as pd
+
+# Create a sample DataFrame for the table
+data = {
+    'Column 1': [1, 2, 3, 4],
+    'Column 2': [5, 6, 7, 8],
+    'Column 3': [9, 10, 11, 12]
+}
+df = pd.DataFrame(data)
+
+# Step 1: Create the figure with the desired size and orientation
+fig = plt.figure(figsize=(11, 8.5))  # 11x8.5 inches for landscape
+
+# Step 2: Define the GridSpec layout (3x3)
+gs = gridspec.GridSpec(3, 3)
+
+# Step 3: Add the large text title in the top-left corner
+title_ax = fig.add_subplot(gs[0, 0])
+title_ax.text(0.5, 0.5, 'Slide Title', fontsize=24, ha='center', va='center')
+title_ax.axis('off')  # Hide the axis
+
+# Step 4: Add the plot in the top row (spanning the second and third columns)
+plot1_ax = fig.add_subplot(gs[0, 1:])
+plot1_ax.plot([0, 1, 2], [0, 1, 4])
+plot1_ax.set_title('Plot 1')
+
+# Step 5: Add the plot in the first column (spanning the second and third rows)
+plot2_ax = fig.add_subplot(gs[1:, 0])
+plot2_ax.plot([0, 1, 2], [0, 1, 2])
+plot2_ax.set_title('Plot 2')
+
+# Step 6: Add the table in the remaining area (bottom right 4 cells)
+table_ax = fig.add_subplot(gs[1:, 1:])
+table_ax.axis('tight')
+table_ax.axis('off')
+table = table_ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
+
+# Adjust layout
+plt.tight_layout()
+
+# Save the figure as PNG or PDF
+fig.savefig('slide.png', dpi=300)
+fig.savefig('slide.pdf', dpi=300)
+
+plt.show()
+
+
+---------------------------------
+**** Sphinx alternative:
+import os
+import importlib
+import inspect
+import html
+
+def extract_functions_and_docstrings(package_name):
+    functions_info = {}
+
+    # Recursively find all Python files in the package
+    for root, dirs, files in os.walk(package_name):
+        for file in files:
+            if file.endswith('.py'):
+                module_path = os.path.join(root, file)
+                module_name = os.path.relpath(module_path, package_name).replace(os.path.sep, '.')[:-3]
+                
+                # Import the module
+                module = importlib.import_module(module_name)
+
+                # Extract functions and their docstrings
+                for name, obj in inspect.getmembers(module):
+                    if inspect.isfunction(obj):
+                        if module_name not in functions_info:
+                            functions_info[module_name] = []
+                        functions_info[module_name].append((name, inspect.getdoc(obj)))
+
+    return functions_info
+
+def write_to_html(functions_info, output_file):
+    with open(output_file, 'w') as f:
+        f.write('<html><head><title>Function Documentation</title></head><body>')
+        f.write('<h1>Function Documentation</h1>')
+
+        for module_name, functions in functions_info.items():
+            f.write(f'<h2>{html.escape(module_name)}</h2>')
+            f.write('<ul>')
+
+            for name, doc in functions:
+                f.write(f'<li><strong>{html.escape(name)}</strong>: {html.escape(doc) if doc else "No documentation available"}</li>')
+
+            f.write('</ul>')
+
+        f.write('</body></html>')
+
+if __name__ == "__main__":
+    package_name = 'your_package_name'  # Replace with your package name
+    output_file = 'documentation.html'
+
+    functions_info = extract_functions_and_docstrings(package_name)
+    write_to_html(functions_info, output_file)
+
+    print(f'Documentation written to {output_file}')
+
+
+*****
+Other
+- use os.walk(top) in my ingestion code
