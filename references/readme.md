@@ -16,3 +16,4 @@ see emails in cga Inbox : Other from Roboflow, DataCamp, ODSC, ... including:
 Gurobi with Pandas webinar (my notes on Son. PC) - https://www.youtube.com/watch?v=V2C4ubGRKh4 -> IDM
 
 Idea from that of summarizing the results of the optimization in a pd data frame -> IDM
+Also, before that they have their variables inside data frames. So they can leverage groupby to collect certain variables for sums, etc.
