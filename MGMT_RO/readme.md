@@ -2,6 +2,8 @@
 
 **<u>Where stuff is</u>:**
 
+**The latest code** (as of 2/3/25, but last worked on months before that) **is capstone2024_v3_idf.py.**
+
 |Kind | Location |
 | ----------- | ----------- |
 | OneNote	| Misc Current Projects nb - MGMT RO section |
