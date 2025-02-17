@@ -1,0 +1,5 @@
+Trying this:
+
+https://thepythoncode.com/article/extract-media-metadata-in-python\
+
+I got this to work after it initially failed. The work-around was to conda install ffmpeg.
